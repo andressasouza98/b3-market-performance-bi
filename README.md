@@ -42,7 +42,24 @@ Análise de performance, risco, retorno acumulado e séries temporais de 12 ativ
 
 ### 5. Dicionário de Dados
 
-*A ser documentado pós-saneamento dos dados.*
+A base tratada final (`data/processed/b3_stocks_processed.csv`) consolida 745 pregões diários para cada um dos 12 ativos da B3 no triénio 2021–2023, estruturada com 14 variáveis sem valores nulos:
+
+| Nome da Coluna Padronizada | Coluna Técnica no CSV | Tipo Primitivo | Descrição do Significado Financeiro | Regra de Cálculo / Fórmula |
+| :--- | :--- | :--- | :--- | :--- |
+| **Data do Pregão** | `date` | `datetime64[ns]` | Data oficial da sessão de negociação na B3 (sem fuso horário). | Extraído do índice temporal da B3 e formatado como `YYYY-MM-DD`. |
+| **Código do Ativo** | `ticker` | `string` / `object` | Símbolo de negociação da ação na B3 com sufixo `.SA`. | Identificador oficial do papel (ex.: `WEGE3.SA`, `EMBJ3.SA`). |
+| **Setor Económico** | `setor` | `string` / `object` | Segmento macroeconómico oficial em que a companhia opera. | Mapeamento determinístico dos 4 setores estratégicos. |
+| **Abertura** | `open` | `float64` | Primeiro preço cotado no leilão de abertura da sessão (R$). | Cotação bruta saneada contra nulos via propagação temporal. |
+| **Máxima** | `high` | `float64` | Preço mais elevado atingido durante o pregão (R$). | Cotação máxima diária registada pela B3. |
+| **Mínima** | `low` | `float64` | Preço mais baixo negociado durante o pregão (R$). | Cotação mínima diária registada pela B3. |
+| **Fecho Ajustado** | `adj_close` | `float64` | Preço de encerramento ajustado por proventos (dividendos, JCP, desdobramentos). | Cotação de liquidação ajustada via `yfinance`. |
+| **Volume Financeiro** | `volume` | `float64` | Montante total transacionado na sessão em moeda corrente. | Volume financeiro diário oficial da B3. |
+| **Retorno Diário** | `ret_diario` | `float64` | Variação percentual do fecho ajustado entre pregões consecutivos. | $\frac{P_t - P_{t-1}}{P_{t-1}}$ via `.pct_change()`, 1º pregão preenchido com `0.0`. |
+| **Base 100** | `base_100` | `float64` | Desempenho relativo normalizado a partir de 100 no 1º pregão de 2021. | $\left(\frac{P_t}{P_0}\right) \times 100$, onde $P_0$ é o fecho ajustado inicial. |
+| **Média Móvel 21D** | `sma_21` | `float64` | Média móvel simples de curto prazo (21 pregões úteis / ~1 mês). | $\frac{1}{21}\sum_{i=0}^{20} P_{t-i}$ via `.rolling(21, min_periods=1).mean()`. |
+| **Média Móvel 50D** | `sma_50` | `float64` | Média móvel simples de médio prazo (50 pregões úteis / ~1 trimestre). | $\frac{1}{50}\sum_{i=0}^{49} P_{t-i}$ via `.rolling(50, min_periods=1).mean()`. |
+| **Pico Histórico** | `peak` | `float64` | Maior cotação ajustada alcançada pelo ativo desde o início da série. | $\max(P_0, P_1, \dots, P_t)$ via `.cummax()`. |
+| **Rebaixamento (Drawdown)** | `drawdown` | `float64` | Perda percentual acumulada face à máxima histórica anterior. | $\frac{P_t - \text{Peak}_t}{\text{Peak}_t}$ (estritamente $\le 0.0$). |
 
 ### 6. Tecnologias e Bibliotecas
 
