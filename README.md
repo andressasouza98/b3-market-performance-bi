@@ -70,13 +70,39 @@ A base tratada final (`data/processed/b3_stocks_processed.csv`) consolida 745 pr
 * **SQLAlchemy & psycopg2-binary** (Persistência e conectividade relacional)
 * **yfinance** (Ingestão de dados de mercado)
 
-### 7. Principais Resultados e Evidências Numéricas
+## 7. Principais Resultados e Evidências Numéricas
 
-*Em desenvolvimento (Card 3 e 4).*
+A tabela abaixo consolida os achados quantitativos da Análise Exploratória de Dados (EDA) conduzida na janela trienal de 01/01/2021 a 31/12/2023 sobre os 12 ativos da carteira B3:
 
-### 8. Discussão e Limitações da Análise
+| Ticker | Setor Econômico | Retorno Acumulado (%) | Volatilidade Anualizada (% a.a.) | Índice Sharpe Empírico | Max Drawdown (%) |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **PETR4.SA** | Petróleo, Gás & Energia | +228.69% | 39.42% | 5.80 | -39.10% |
+| **PRIO3.SA** | Petróleo, Gás & Energia | +208.32% | 46.78% | 4.45 | -34.32% |
+| **EMBJ3.SA** | Bens de Capital & Indústria | +167.50% | 46.82% | 3.58 | -58.27% |
+| **GGBR4.SA** | Materiais Básicos & Siderurgia/Papel | +30.79% | 35.56% | 0.87 | -33.93% |
+| **EGIE3.SA** | Petróleo, Gás & Energia | +25.35% | 18.76% | 1.35 | -17.65% |
+| **ITUB4.SA** | Financeiro, Consumo & Locação | +24.02% | 28.83% | 0.83 | -35.87% |
+| **VALE3.SA** | Materiais Básicos & Siderurgia/Papel | +18.11% | 33.90% | 0.53 | -41.34% |
+| **WEGE3.SA** | Bens de Capital & Indústria | +3.51% | 32.83% | 0.11 | -49.51% |
+| **ABEV3.SA** | Financeiro, Consumo & Locação | +2.57% | 25.46% | 0.10 | -31.42% |
+| **RENT3.SA** | Financeiro, Consumo & Locação | -0.25% | 36.89% | -0.01 | -38.40% |
+| **KLBN11.SA** | Materiais Básicos & Siderurgia/Papel | -0.80% | 26.62% | -0.03 | -39.30% |
+| **BBDC4.SA** | Financeiro, Consumo & Locação | -6.93% | 31.38% | -0.22 | -46.05% |
 
-*Em desenvolvimento.*
+### Síntese dos 4 KPIs Estratégicos da Carteira (Critério 10)
+
+* **Retorno Médio da Carteira:** **+58.24%** no triênio analisado.
+* **Ativo Destaque da Carteira:** **PETR4.SA** (**+228.69%**), impulsionado pelo ciclo global de alta de commodities e forte distribuição de proventos.
+* **Ativo de Menor Desempenho:** **BBDC4.SA** (**-6.93%**), impactado pelo ciclo de alta de juros e compressão de margens de crédito.
+* **Ativo Mais Resiliente (Menor Risco):** **EGIE3.SA** (Max Drawdown de **-17.65%** e menor volatilidade anualizada com **18.76% a.a.**), refletindo o perfil defensivo do segmento de utilidades públicas.
+
+---
+
+## 8. Discussão e Limitações da Análise
+
+> **Rigor Metodológico e Limitações Contextuais (Itens 4.5 e 5.2 do Edital):**  
+> Os dados compreendem a série temporal diária de 01/01/2021 a 31/12/2023. O período foi marcado pelo ciclo macroeconômico de aperto monetário no Brasil (elevação da Selic de 2,00% para 13,75% a.a.) e choques geopolíticos internacionais na cadeia de suprimentos e energia.  
+> As correlações observadas e as performances passadas dos ativos **não implicam causalidade mecânica nem garantem rentabilidade futura**. As conclusões têm caráter exclusivamente analítico e educacional, não constituindo recomendação de alocação ou investimento em valores mobiliários.
 
 ### 9. Aplicação Profissional e Decisões de Negócio
 
