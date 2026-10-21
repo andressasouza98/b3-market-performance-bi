@@ -49,13 +49,15 @@ wheels/
 */.ipynb_checkpoints/*
 
 # =========================================================================
-# DADOS LOCAIS VOLUMOSOS (Preserva os .gitkeep das pastas)
+# DADOS LOCAIS VOLUMOSOS (Preserva os .gitkeep e a base tratada de contingência)
 # =========================================================================
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/b3_stocks_processed.csv
 *.csv
+!b3_stocks_processed.csv
 *.parquet
 *.xlsx
 *.sqlite
